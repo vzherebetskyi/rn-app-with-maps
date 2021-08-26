@@ -3,7 +3,7 @@ import { View, Button, Text, Image, StyleSheet, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
-import { Colors } from '../constants/Colors';
+import Colors from '../constants/Colors';
 
 const ImgPicker = props => {
   const [pickedImage, setPickedImage] = useState();
@@ -32,6 +32,7 @@ const ImgPicker = props => {
       quality: 0.5,
     });
     setPickedImage(image.uri);
+    props.onImageTaken(image.uri);
   };
 
   return (
@@ -55,6 +56,7 @@ const ImgPicker = props => {
 const styles = StyleSheet.create({
     imagePicker: {
       alignItems: 'center',
+      marginBottom: 15,
     },
     imagePreview: {
       width: '100%',
