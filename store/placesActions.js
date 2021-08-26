@@ -1,11 +1,29 @@
+import * as FileSystem from 'expo-file-system';
+import console = require('console');
 export const ADD_PLACE = 'ADD_PLACE';
 
 export const addPlace = (title, image) => {
-    return {
+    
+  return async dispatch => {
+    const fileName = image.split('/').pop();
+    const newPath = FileSystem.documentDirectory + fileName;
+
+    try {
+      FileSystem.moveAsync({
+        from: image,
+        to: newPath,
+      });
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+
+    dispatch({
       type: ADD_PLACE,
       placeData: {
         title,
-        image,
+        image: newPath,
       }
-    };
+    });
+  };
 };
