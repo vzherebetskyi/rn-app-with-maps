@@ -7,7 +7,7 @@ import PlacesNavigator from './navigation/PlacesNavigator';
 import placesReducer from './store/placesReducer';
 import { init } from './helpers/db';
 
-init(),then(() => {
+init().then(() => {
   console.log('Initialised successfully');
 }).catch(err => {
   console.log(err);
