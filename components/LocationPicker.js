@@ -80,7 +80,7 @@ const LocationPicker = props => {
   return (
     <View style={styles.locationPicker}>
       <MapPreview
-        style={styles.imagePreview}
+        style={styles.mapPreview}
         location={pickedLocation}
         onPress={pickOnMapHandler}
       >      
