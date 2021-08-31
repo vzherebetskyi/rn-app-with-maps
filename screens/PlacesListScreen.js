@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Platform, FlatList } from 'react-native';
+import { StyleSheet, Platform, FlatList } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,7 +15,6 @@ const PlacesListScreen = props => {
     dispatch(placesActions.loadPlaces());
   }, [dispatch]);
 
-  console.log(places);
   return (
     <FlatList
       data={places}
@@ -24,7 +23,7 @@ const PlacesListScreen = props => {
         <PlaceItem
           image={itemData.item.imageUri}
           title={itemData.item.title}
-          address={null}
+          address={itemData.item.address}
           onSelect={props.navigation.navigate('PlaceDetail', {
             placeTitle: itemData.item.title,
             placeId: itemData.item.id,
