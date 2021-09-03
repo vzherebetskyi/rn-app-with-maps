@@ -1,7 +1,12 @@
 {
   "expo": {
-    "name": "rn-app-with-maps",
-    "slug": "rn-app-with-maps",
+    "name": "Great Places",
+    "slug": "great-places",
+    "privacy": "public",
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

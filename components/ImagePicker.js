@@ -43,11 +43,13 @@ const ImgPicker = props => {
           ) : (
           <Image style={styles.image} source={{uri: pickedImage}} />
         )}
-        <Button
-          title="Take Image"
-          color={Colors.primary}
-          onPress={takeImageHandler}
-        />
+      </View>
+      <View style={styles.buttonContainer}>
+          <Button
+            title="Take Image"
+            color={Colors.primary}
+            onPress={takeImageHandler}
+          />
       </View>
     </View>
   );
@@ -71,6 +73,11 @@ const styles = StyleSheet.create({
       width: '100%',
       height: '100%',
     },
+    buttonContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      width: '100%',
+    }
 });
   
 export default ImgPicker;
