@@ -42,7 +42,7 @@ const NewPlaceScreen = props => {
         />
         <ImgPicker onImageTaken={imageTakenHandler} />
         <LocationPicker
-          navigation={props.navigation}
+          route={props.route}
           onLocationPicked={locationPickedHandler}
         />
         <Button
@@ -55,7 +55,7 @@ const NewPlaceScreen = props => {
   );
 };
 
-NewPlaceScreen.navigationOptions = navData => {
+export const screenOptionsNewPlace = () => {
   return {
     headerTitle: 'Add Place',
   };

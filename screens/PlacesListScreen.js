@@ -24,7 +24,7 @@ const PlacesListScreen = props => {
           image={itemData.item.imageUri}
           title={itemData.item.title}
           address={itemData.item.address}
-          onSelect={props.navigation.navigate('PlaceDetails', {
+          onSelect={() => props.navigation.navigate('PlaceDetails', {
             placeTitle: itemData.item.title,
             placeId: itemData.item.id,
           })}
@@ -34,23 +34,19 @@ const PlacesListScreen = props => {
   );
 };
 
-PlacesListScreen.navigationOptions = navData => {
+export const screenOptions = navData => {
   return {
     headerTitle: 'All Places',
-    headerRight:() => (
+    headerRight: () => (
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
           <Item
             title='Add Place'
             iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
-            onPress={() => {
-              navData.navigation.navigate({ routeName: 'NewPlace' });
-            }}
+            onPress={() => navData.navigation.navigate('NewPlace')}
           />
       </HeaderButtons>
     )
   };
 };
-
-const styles = StyleSheet.create({});
   
 export default PlacesListScreen;

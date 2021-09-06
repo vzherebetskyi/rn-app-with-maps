@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 import Colors from '../constants/Colors';
 
 const MapScreen = props => {
-  const initialLocation = props.navigation.getParam('initialLocation');
-  const readonly = props.navigation.getParam('readonly');
+  const initialLocation = props.route.params && props.route.params.initialLocation;
+  const readonly = props.route.params && props.route.params.readonly;
 
   const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 
@@ -36,7 +36,20 @@ const MapScreen = props => {
   }, [selectedLocation]);
 
   useEffect(() => {
-    props.navigation.setParams({saveLocation: savePickedLocationHandler});
+    const readonly = navData.route.params && navData.route.params.readonly;
+    if (readonly) {
+      return {};
+    } else {
+      props.navigation.setOptions({
+        headerRight: () => (
+          <TouchableOpacity style={styles.headerButton} onPress={savePickedLocationHandler}>
+            <Text style={styles.headerButtonText}>
+              Save
+            </Text>
+          </TouchableOpacity>
+          )      
+      });
+    }
   }, [savePickedLocationHandler]);
 
   let markerCoordinates;
@@ -62,24 +75,6 @@ const MapScreen = props => {
       }
     </MapView>
   );
-};
-
-MapScreen.navigationOptions = navData => {
-  const saveFn = navData.navigation.getParam('saveLocation');
-  const readonly = navData.navigation.getParam('readonly');
-  if (readonly) {
-    return {};
-  }
-
-  return {
-    headerRight: (
-    <TouchableOpacity style={styles.headerButton} onPress={saveFn}>
-      <Text style={styles.headerButtonText}>
-        Save
-      </Text>
-    </TouchableOpacity>
-    )
-  };
 };
 
 const styles = StyleSheet.create({

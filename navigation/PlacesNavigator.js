@@ -1,25 +1,49 @@
+import React from 'react';
 import { Platform } from 'react-native';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import PlacesListScreen from '../screens/PlacesListScreen';
-import PlaceDetailsScreen from '../screens/PlaceDetailsScreen';
-import NewPlaceScreen from '../screens/NewPlaceScreen';
+import PlacesListScreen, { screenOptions } from '../screens/PlacesListScreen';
+import PlaceDetailsScreen, { screenOptionsDetails } from '../screens/PlaceDetailsScreen';
+import NewPlaceScreen, { screenOptionsNewPlace } from '../screens/NewPlaceScreen';
 import MapScreen from '../screens/MapScreen';
 import Colors from '../constants/Colors';
 
-const PlacesNavigator = createStackNavigator({
-  Places: PlacesListScreen,
-  PlaceDetails: PlaceDetailsScreen,
-  NewPlace: NewPlaceScreen,
-  Map: MapScreen,
-}, {
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-      headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
-    }
+const defaultNavigationOptions = {
+  headerStyle: {
+    backgroundColor: Platform.OS === 'android' ? Colors.primary : '',
+    headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
   }
-});
+};
 
-export default createAppContainer(PlacesNavigator);
+const MyStack = createStackNavigator();
+
+const AppNavigator = () => {
+  return (
+    <NavigationContainer>
+      <MyStack.Navigator>
+        <MyStack.Screen
+          name="Places"
+          component={PlacesListScreen}
+          options={screenOptions}
+        />
+        <MyStack.Screen
+          name="PlaceDetails"
+          component={PlaceDetailsScreen}
+          options={screenOptionsDetails}
+        />
+        <MyStack.Screen
+          name="NewPlace"
+          component={NewPlaceScreen}
+          options={screenOptionsNewPlace}
+        />
+        <MyStack.Screen
+          name="Map"
+          component={MapScreen}
+        />
+      </MyStack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default AppNavigator;
